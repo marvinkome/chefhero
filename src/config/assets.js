@@ -1,5 +1,5 @@
 export const assets = {
-    font: 'Sarabun',
+    font: 'Poppins',
     app_name: 'Chef Hero',
     logo: require('src/assets/images/chefherologo.png'),
     bigLogo: require('src/assets/images/chefherobig.png'),

@@ -14,7 +14,7 @@ export function Button(props) {
         <TouchableOpacity style={containerStyle} onPress={props.onPress}>
             {props.children || (
                 <View style={[style.innerContainer, props.innerContainerStyle]}>
-                    <Text type="h4" style={style.buttonText}>
+                    <Text style={style.buttonText}>
                         {props.title}
                     </Text>
                     <View style={{ width: 20 }} />
@@ -33,20 +33,25 @@ const style = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 10,
         height: 60,
         backgroundColor: colors.indigo,
         borderRadius: 50,
-        marginVertical: 10
+        marginVertical: 10,
+        elevation: 10,
+        shadowColor: colors.indigo,
+        shadowOffset: { width: 0, height: 10 },
+        shadowOpacity: 0.3,
+        shadowRadius: 40
     },
     onContLoading: {
-        elevation: 0
+        elevation: 0,
+        shadowOffset: { width: 0, height: 0 },
     },
     innerContainer: {
         flexDirection: 'row'
     },
     buttonText: {
         color: colors.white,
-        fontWeight: 'bold'
+        fontWeight: '500'
     }
 });

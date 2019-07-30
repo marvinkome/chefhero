@@ -70,7 +70,7 @@ const style = StyleSheet.create({
     errorText: {
         flex: 1,
         color: colors.yellow,
-        fontWeight: 'bold'
+        fontWeight: '500'
     },
     terms: {
         flexDirection: 'row',

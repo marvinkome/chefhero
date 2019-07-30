@@ -96,7 +96,6 @@ const style = StyleSheet.create({
         backgroundColor: 'transparent',
         fontFamily: assets.font,
         color: `${colors.white}c`,
-        fontWeight: 'bold'
     },
     secureTextInputView: {
         flexDirection: 'row',

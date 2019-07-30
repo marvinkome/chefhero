@@ -34,7 +34,6 @@ export default class AuthPage extends React.Component {
                             style.topbarItemText,
                             ...(activeTab === 'login' ? [style.topbarItemTextActive] : [])
                         ]}
-                        type="h4"
                     >
                             Sign In
                     </Text>
@@ -52,7 +51,6 @@ export default class AuthPage extends React.Component {
                             style.topbarItemText,
                             ...(activeTab === 'register' ? [style.topbarItemTextActive] : [])
                         ]}
-                        type="h4"
                     >
                             Sign Up
                     </Text>
@@ -102,11 +100,11 @@ const style = StyleSheet.create({
     },
     topbarItemText: {
         color: `${colors.indigo}42`,
-        fontWeight: 'bold'
+        fontWeight: '500'
     },
     topbarItemTextActive: {
         color: colors.indigo,
-        fontWeight: 'bold'
+        fontWeight: '500'
     },
 
     pageContainer: {
