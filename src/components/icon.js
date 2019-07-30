@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-native';
 
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Feather from 'react-native-vector-icons/Feather';
@@ -8,6 +9,8 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunity from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
+import CookingPNG from 'src/assets/images/cooking.png';
 
 export function Icon({ type, ...props }) {
     switch (type) {
@@ -28,4 +31,8 @@ export function Icon({ type, ...props }) {
     default:
         return <MaterialIcons {...props} />;
     }
+}
+
+export function CookingIcon(props) {
+    return <Image source={CookingPNG} style={{ width: props.size, height: props.size }} />;
 }

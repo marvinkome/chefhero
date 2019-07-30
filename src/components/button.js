@@ -41,7 +41,7 @@ const style = StyleSheet.create({
         shadowColor: colors.indigo,
         shadowOffset: { width: 0, height: 10 },
         shadowOpacity: 0.3,
-        shadowRadius: 40
+        shadowRadius: 20
     },
     onContLoading: {
         elevation: 0,

@@ -112,7 +112,7 @@ const style = StyleSheet.create({
     stackTitle: {
         width: '90%',
         textAlign: 'center',
-        fontWeight: 'bold',
+        fontWeight: '500',
         color: colors.darkPurple
     }
 });
