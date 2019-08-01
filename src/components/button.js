@@ -10,15 +10,22 @@ export function Button(props) {
         containerStyle.push(style.onContLoading);
     }
 
+    if (props.type === 'small') {
+        containerStyle.push(style.container_small);
+    }
+
     return (
         <TouchableOpacity style={containerStyle} onPress={props.onPress}>
             {props.children || (
                 <View style={[style.innerContainer, props.innerContainerStyle]}>
-                    <Text style={style.buttonText}>
-                        {props.title}
-                    </Text>
-                    <View style={{ width: 20 }} />
-                    {props.loading && <ActivityIndicator size="small" color={colors.white} />}
+                    <Text style={style.buttonText}>{props.title}</Text>
+
+                    {props.loading && (
+                        <React.Fragment>
+                            <View style={{ width: 20 }} />
+                            <ActivityIndicator size="small" color={colors.white} />
+                        </React.Fragment>
+                    )}
                 </View>
             )}
         </TouchableOpacity>
@@ -43,15 +50,23 @@ const style = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 20
     },
+    container_small: {
+        height: 30,
+        shadowColor: colors.indigo,
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.3,
+        shadowRadius: 10
+    },
     onContLoading: {
         elevation: 0,
-        shadowOffset: { width: 0, height: 0 },
+        shadowOffset: { width: 0, height: 0 }
     },
     innerContainer: {
         flexDirection: 'row'
     },
     buttonText: {
         color: colors.white,
-        fontWeight: '500'
+        fontWeight: '500',
+        textAlign: 'center'
     }
 });

@@ -27,7 +27,7 @@ export const DrawerContent = withNavigation((props) => {
                         </View>
                         <View>
                             <Text style={style.item}>Orders</Text>
-                            <Text type="small" style={style.itemDescription}>
+                            <Text style={style.itemDescription}>
                                 See your orders for the week
                             </Text>
                         </View>
@@ -48,7 +48,7 @@ export const DrawerContent = withNavigation((props) => {
                         </View>
                         <View>
                             <Text style={style.item}>Restaurants</Text>
-                            <Text type="small" style={style.itemDescription}>
+                            <Text style={style.itemDescription}>
                                 Manage your subscribed restaurants
                             </Text>
                         </View>
@@ -61,7 +61,7 @@ export const DrawerContent = withNavigation((props) => {
 
 const style = StyleSheet.create({
     container: {
-        paddingHorizontal: 20,
+        paddingHorizontal: 10,
     },
     itemContainer: {
         flexDirection: 'row',
@@ -70,7 +70,7 @@ const style = StyleSheet.create({
         alignItems: 'center',
         borderBottomColor: colors.lightGrey,
         borderBottomWidth: 1,
-        paddingHorizontal: 15,
+        paddingHorizontal: 20,
     },
     iconContainer: {
         justifyContent: 'center',

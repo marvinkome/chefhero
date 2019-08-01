@@ -33,32 +33,32 @@ export const LinkText = withNavigation((props) => {
 
 const style = StyleSheet.create({
     h1: {
-        fontSize: 39.06,
+        fontSize: 34.18,
         color: colors.textColor,
         fontFamily: assets.font
     },
     h2: {
-        fontSize: 31.25,
+        fontSize: 27.34,
         color: colors.textColor,
         fontFamily: assets.font
     },
     h3: {
-        fontSize: 25,
+        fontSize: 21.8,
         color: colors.textColor,
         fontFamily: assets.font
     },
     h4: {
-        fontSize: 20,
+        fontSize: 17.5,
         color: colors.textColor,
         fontFamily: assets.font
     },
     p: {
-        fontSize: 16,
+        fontSize: 14,
         color: colors.textColor,
         fontFamily: assets.font
     },
     small: {
-        fontSize: 12.8,
+        fontSize: 11.2,
         color: colors.textColor,
         fontFamily: assets.font
     },

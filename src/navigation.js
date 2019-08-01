@@ -15,6 +15,7 @@ import AuthPage from 'src/screens/auth';
 // orders
 import CurrentOrders from 'src/screens/orders/current';
 import SelectRestaurant from 'src/screens/orders/create/restaurant';
+import SelectMeals from 'src/screens/orders/create/meals';
 
 
 const AuthNavigator = createStackNavigator(
@@ -31,13 +32,13 @@ const OrdersNavigator = createStackNavigator(
     {
         [screenConfig.main.orders.currentOrders]: CurrentOrders,
         [screenConfig.main.orders.createOrders]: SelectRestaurant,
-        // [screenConfig.main.orders.selectMeals]: SelectMeals,
+        [screenConfig.main.orders.selectMeals]: SelectMeals,
         // [screenConfig.main.orders.reviewOrders]: ReviewOrders,
         // [screenConfig.main.orders.ordersPayment]: OrdersPayment
     },
     {
         headerMode: 'none',
-        initialRouteName: screenConfig.main.orders.createOrders
+        initialRouteName: screenConfig.main.orders.selectMeals
     }
 );
 
