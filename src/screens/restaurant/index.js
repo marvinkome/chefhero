@@ -108,7 +108,8 @@ const style = StyleSheet.create({
         alignItems: 'center'
     },
     day: {
-        paddingHorizontal: 7
+        paddingHorizontal: 7,
+        color: colors.primary
     },
     activeDay: {
         backgroundColor: colors.primary,

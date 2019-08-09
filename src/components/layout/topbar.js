@@ -69,11 +69,6 @@ export function ImageHeader(props) {
                         />
                     </TouchableOpacity>
 
-                    {/* title */}
-                    <Text type="h4" style={style.title}>
-                        {props.title}
-                    </Text>
-
                     {/* right logo */}
                     <TouchableOpacity onPress={null}>
                         <Icon
@@ -87,7 +82,11 @@ export function ImageHeader(props) {
             </View>
 
             <ImageBackground source={props.image} style={style.image} resizeMode="center">
-                <View style={style.imageOverlay} />
+                <View style={style.imageOverlay}>
+                    <Text type="h3" style={style.imageTitle}>
+                        {props.title}
+                    </Text>
+                </View>
             </ImageBackground>
         </React.Fragment>
     );
@@ -132,6 +131,12 @@ const style = StyleSheet.create({
     imageOverlay: {
         width: '100%',
         height: '100%',
-        backgroundColor: `${colors.black}66`
+        backgroundColor: `${colors.black}66`,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    imageTitle: {
+        color: colors.white,
+        fontWeight: '600'
     }
 });

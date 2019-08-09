@@ -7,17 +7,9 @@ export const screenConfig = {
     },
     main: {
         home: 'app.main.home',
-        restaurants: {
-            index: 'app.main.restaurants.index'
-        },
+        restaurants: 'app.main.restaurants',
         cart: 'app.main.cart',
-        orders: {
-            currentOrders: 'app.main.orders.current',
-            createOrders: 'app.main.orders.create',
-            selectMeals: 'app.main.orders.select_meal',
-            reviewOrders: 'app.main.orders.review',
-            ordersPayment: 'app.main.ordersPayment'
-        },
+        orders: 'app.main.order',
         payment: {
             index: 'app.main.payment'
         }

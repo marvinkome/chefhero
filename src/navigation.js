@@ -15,6 +15,7 @@ import AuthPage from 'src/screens/auth';
 import Home from 'src/screens/home';
 import Restaurants from 'src/screens/restaurant';
 import Cart from 'src/screens/cart';
+import Orders from 'src/screens/orders';
 
 const AuthNavigator = createStackNavigator(
     {
@@ -29,12 +30,13 @@ const AuthNavigator = createStackNavigator(
 const HomeNavigation = createStackNavigator(
     {
         [screenConfig.main.home]: Home,
-        [screenConfig.main.restaurants.index]: Restaurants,
-        [screenConfig.main.cart]: Cart
+        [screenConfig.main.restaurants]: Restaurants,
+        [screenConfig.main.cart]: Cart,
+        [screenConfig.main.orders]: Orders
     },
     {
         headerMode: 'none',
-        initialRouteName: screenConfig.main.cart
+        initialRouteName: screenConfig.main.home
     }
 );
 
