@@ -1,11 +1,15 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
-import { Text, Icon, Ratings } from 'src/components';
-import { colors } from 'src/config';
+import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { withNavigation } from 'react-navigation';
+import { Text, Ratings } from 'src/components';
+import { colors, screenConfig } from 'src/config';
 
-export default function Restaurant() {
+function Restaurant(props) {
     return (
-        <View style={style.restaurantContainer}>
+        <TouchableOpacity
+            onPress={() => props.navigation.navigate(screenConfig.main.restaurants)}
+            style={style.restaurantContainer}
+        >
             <View style={style.restaurantImageContainer}>
                 <Image
                     source={require('src/assets/images/restaurant.jpg')}
@@ -24,7 +28,7 @@ export default function Restaurant() {
                     </Text>
                 </Text>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }
 
@@ -73,3 +77,5 @@ const style = StyleSheet.create({
         fontWeight: 'normal'
     }
 });
+
+export default withNavigation(Restaurant);

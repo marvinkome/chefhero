@@ -47,7 +47,6 @@ const MainNavigator = createDrawerNavigator(
     {
         initialRouteName: 'Home',
         drawerWidth: Dimensions.get('window').width * 0.9, // 90% of screen width
-        drawerPosition: 'right',
         contentComponent: DrawerContent,
         backBehavior: 'none'
     }

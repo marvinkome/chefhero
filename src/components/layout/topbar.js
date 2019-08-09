@@ -1,41 +1,18 @@
 import React from 'react';
+import { withNavigation } from 'react-navigation';
 import { View, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import { Icon, Text } from 'src/components';
-import { colors } from 'src/config';
+import { colors, screenConfig } from 'src/config';
 
-export function MainHeader(props) {
+export const __Header = withNavigation((props) => {
     return (
-        <View style={style.container}>
+        <View style={[style.container, props.containerStyle]}>
             {/* left logo */}
-            <TouchableOpacity onPress={null}>
-                <Icon type="simple-line-icons" name="menu" size={22} style={style.screenIcon} />
-            </TouchableOpacity>
-
-            {/* title */}
-            <Text type="h3" style={style.title}>
-                {props.title}
-            </Text>
-
-            {/* right logo */}
-            <TouchableOpacity onPress={null}>
-                <Icon type="feather" name="shopping-cart" size={22} style={style.screenIcon} />
-            </TouchableOpacity>
-        </View>
-    );
-}
-
-export function StackHeader(props) {
-    return (
-        <View style={style.container}>
-            {/* left logo */}
-            <TouchableOpacity onPress={null}>
-                <Icon
-                    type="simple-line-icons"
-                    name="arrow-left"
-                    size={22}
-                    style={style.screenIcon}
-                />
-            </TouchableOpacity>
+            {props.left || (
+                <TouchableOpacity onPress={props.navigation.openDrawer}>
+                    <Icon type="simple-line-icons" name="menu" size={22} style={style.screenIcon} />
+                </TouchableOpacity>
+            )}
 
             {/* title */}
             <Text type="h3" style={style.title}>
@@ -44,7 +21,7 @@ export function StackHeader(props) {
 
             {/* right logo */}
             {!props.noCart ? (
-                <TouchableOpacity onPress={null}>
+                <TouchableOpacity onPress={() => props.navigation.navigate(screenConfig.main.cart)}>
                     <Icon type="feather" name="shopping-cart" size={22} style={style.screenIcon} />
                 </TouchableOpacity>
             ) : (
@@ -52,33 +29,35 @@ export function StackHeader(props) {
             )}
         </View>
     );
-}
+});
+
+export const MainHeader = (props) => {
+    return <__Header {...props} />;
+};
+
+export const StackHeader = withNavigation((props) => {
+    return (
+        <__Header
+            {...props}
+            left={
+                <TouchableOpacity onPress={() => props.navigation.goBack()}>
+                    <Icon
+                        type="simple-line-icons"
+                        name="arrow-left"
+                        size={22}
+                        style={style.screenIcon}
+                    />
+                </TouchableOpacity>
+            }
+        />
+    );
+});
 
 export function ImageHeader(props) {
     return (
         <React.Fragment>
             <View style={style.headerBg}>
-                <View style={[style.container, style.transparent]}>
-                    {/* left logo */}
-                    <TouchableOpacity onPress={null}>
-                        <Icon
-                            type="simple-line-icons"
-                            name="arrow-left"
-                            size={22}
-                            style={style.screenIcon}
-                        />
-                    </TouchableOpacity>
-
-                    {/* right logo */}
-                    <TouchableOpacity onPress={null}>
-                        <Icon
-                            type="feather"
-                            name="shopping-cart"
-                            size={22}
-                            style={style.screenIcon}
-                        />
-                    </TouchableOpacity>
-                </View>
+                <StackHeader {...props} title="" containerStyle={style.transparent} />
             </View>
 
             <ImageBackground source={props.image} style={style.image} resizeMode="center">
