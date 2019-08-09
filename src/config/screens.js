@@ -6,6 +6,11 @@ export const screenConfig = {
         register: 'app.auth.register'
     },
     main: {
+        home: 'app.main.home',
+        restaurants: {
+            index: 'app.main.restaurants.index'
+        },
+        cart: 'app.main.cart',
         orders: {
             currentOrders: 'app.main.orders.current',
             createOrders: 'app.main.orders.create',
@@ -15,9 +20,6 @@ export const screenConfig = {
         },
         payment: {
             index: 'app.main.payment'
-        },
-        restaurants: {
-            myList: 'app.main.restaurants.my_restaurants'
         }
     }
 };

@@ -9,27 +9,30 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunity from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import AntIcons from 'react-native-vector-icons/AntDesign';
 
 import CookingPNG from 'src/assets/images/cooking.png';
 
 export function Icon({ type, ...props }) {
     switch (type) {
-    case 'simple-line-icons':
-        return <SimpleLineIcons {...props} />;
-    case 'feather':
-        return <Feather {...props} />;
-    case 'evilicons':
-        return <EvilIcons {...props} />;
-    case 'entypo':
-        return <Entypo {...props} />;
-    case 'font-awesome':
-        return <FontAwesome {...props} />;
-    case 'ionicons':
-        return <IonIcons {...props} />;
-    case 'material-community':
-        return <MaterialCommunity {...props} />;
-    default:
-        return <MaterialIcons {...props} />;
+        case 'simple-line-icons':
+            return <SimpleLineIcons {...props} />;
+        case 'feather':
+            return <Feather {...props} />;
+        case 'evilicons':
+            return <EvilIcons {...props} />;
+        case 'entypo':
+            return <Entypo {...props} />;
+        case 'font-awesome':
+            return <FontAwesome {...props} />;
+        case 'ionicons':
+            return <IonIcons {...props} />;
+        case 'material-community':
+            return <MaterialCommunity {...props} />;
+        case 'ant-design':
+            return <AntIcons {...props} />;
+        default:
+            return <MaterialIcons {...props} />;
     }
 }
 

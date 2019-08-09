@@ -18,7 +18,7 @@ export const Header = (props) => {
     );
 };
 
-export const ScreenHeader = withNavigation((props) => {
+export const __WithDrawerHeader = withNavigation((props) => {
     return (
         <Header
             right={
@@ -30,22 +30,23 @@ export const ScreenHeader = withNavigation((props) => {
     );
 });
 
-export const DrawerHeader = withNavigation((props) => {
+export const ScreenHeader = withNavigation((props) => {
     return (
-        <Header
-            right={
-                <TouchableOpacity style={style.drawerIcon} onPress={props.navigation.closeDrawer}>
-                    <Icon type="evilicons" name="close" size={20} color={colors.white} />
-                </TouchableOpacity>
-            }
-        />
+        <React.Fragment>
+            <__WithDrawerHeader />
+            <View style={style.stackHeaderView}>
+                <Text type="h3" style={[style.stackTitle, { width: '100%' }]}>
+                    {props.title}
+                </Text>
+            </View>
+        </React.Fragment>
     );
 });
 
 export const StackHeader = withNavigation((props) => {
     return (
         <React.Fragment>
-            <ScreenHeader />
+            <__WithDrawerHeader />
             <View style={style.stackHeaderView}>
                 <Icon
                     type="simple-line-icons"
@@ -58,6 +59,18 @@ export const StackHeader = withNavigation((props) => {
                 </Text>
             </View>
         </React.Fragment>
+    );
+});
+
+export const DrawerHeader = withNavigation((props) => {
+    return (
+        <Header
+            right={
+                <TouchableOpacity style={style.drawerIcon} onPress={props.navigation.closeDrawer}>
+                    <Icon type="evilicons" name="close" size={20} color={colors.white} />
+                </TouchableOpacity>
+            }
+        />
     );
 });
 

@@ -7,7 +7,7 @@ export default class ChefHero extends React.Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
+                <StatusBar backgroundColor={colors.primaryDark} barStyle="light-content" />
                 <RootNavigator />
             </View>
         );

@@ -43,12 +43,12 @@ const style = StyleSheet.create({
         fontFamily: assets.font
     },
     h3: {
-        fontSize: 21.8,
+        fontSize: 18,
         color: colors.textColor,
         fontFamily: assets.font
     },
     h4: {
-        fontSize: 17.5,
+        fontSize: 15,
         color: colors.textColor,
         fontFamily: assets.font
     },

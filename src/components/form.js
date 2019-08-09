@@ -23,7 +23,7 @@ export function TextInput(props) {
             </View>
             <RNTextInput
                 {...props}
-                placeholderTextColor={`${colors.white}c`}
+                placeholderTextColor={`${colors.white}cc`}
                 style={[style.textInput, props.style]}
             />
             {props.renderRightIcon}
@@ -95,7 +95,7 @@ const style = StyleSheet.create({
         fontSize: 16,
         backgroundColor: 'transparent',
         fontFamily: assets.font,
-        color: `${colors.white}c`,
+        color: `${colors.white}cc`
     },
     secureTextInputView: {
         flexDirection: 'row',

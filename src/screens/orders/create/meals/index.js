@@ -130,8 +130,6 @@ export default class SelectMeals extends React.Component {
                 <StackHeader title="Select Meals" />
 
                 <ScrollView contentContainerStyle={style.mainContainer}>
-                    <Calendar dates={dates} />
-
                     {/* options */}
                     {meals.map((mealOption) => (
                         <View style={style.optionContainer} key={mealOption.id}>

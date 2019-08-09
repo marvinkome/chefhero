@@ -12,11 +12,9 @@ import { screenConfig } from './config';
 // auth
 import AuthPage from 'src/screens/auth';
 
-// orders
-import CurrentOrders from 'src/screens/orders/current';
-import SelectRestaurant from 'src/screens/orders/create/restaurant';
-import SelectMeals from 'src/screens/orders/create/meals';
-
+import Home from 'src/screens/home';
+import Restaurants from 'src/screens/restaurant';
+import Cart from 'src/screens/cart';
 
 const AuthNavigator = createStackNavigator(
     {
@@ -28,27 +26,24 @@ const AuthNavigator = createStackNavigator(
     }
 );
 
-const OrdersNavigator = createStackNavigator(
+const HomeNavigation = createStackNavigator(
     {
-        [screenConfig.main.orders.currentOrders]: CurrentOrders,
-        [screenConfig.main.orders.createOrders]: SelectRestaurant,
-        [screenConfig.main.orders.selectMeals]: SelectMeals,
-        // [screenConfig.main.orders.reviewOrders]: ReviewOrders,
-        // [screenConfig.main.orders.ordersPayment]: OrdersPayment
+        [screenConfig.main.home]: Home,
+        [screenConfig.main.restaurants.index]: Restaurants,
+        [screenConfig.main.cart]: Cart
     },
     {
         headerMode: 'none',
-        initialRouteName: screenConfig.main.orders.selectMeals
+        initialRouteName: screenConfig.main.cart
     }
 );
 
 const MainNavigator = createDrawerNavigator(
     {
-        Orders: OrdersNavigator,
-        // Restaurants: RestaurantsNavigator
+        Home: HomeNavigation
     },
     {
-        initialRouteName: 'Orders',
+        initialRouteName: 'Home',
         drawerWidth: Dimensions.get('window').width * 0.9, // 90% of screen width
         drawerPosition: 'right',
         contentComponent: DrawerContent,

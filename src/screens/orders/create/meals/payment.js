@@ -14,7 +14,7 @@ class Payment extends React.Component {
                 </View>
 
                 <View style={style.buttonContainer}>
-                    <Button type="small" title="Review Orders" />
+                    <Button type="small" title="Add to orders" />
                 </View>
             </View>
         );
@@ -44,7 +44,7 @@ const style = StyleSheet.create({
         color: colors.indigo2
     },
     buttonContainer: {
-        width: '40%'
+        width: '60%'
     }
 });
 
