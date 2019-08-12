@@ -3,14 +3,18 @@ import { View, StyleSheet } from 'react-native';
 import { Icon } from 'src/components';
 import { colors } from 'src/config';
 
-export function Ratings() {
+export function Ratings(props) {
     return (
         <View style={style.restaurantRatings}>
-            <Icon name="ios-star" type="ionicons" size={15} color={colors.primary} />
-            <Icon name="ios-star" type="ionicons" size={15} color={colors.primary} />
-            <Icon name="ios-star" type="ionicons" size={15} color={colors.primary} />
-            <Icon name="ios-star" type="ionicons" size={15} color={colors.primary} />
-            <Icon name="ios-star-outline" type="ionicons" size={15} color={colors.primary} />
+            {[...Array(5).keys()].map((number) => (
+                <Icon
+                    key={number}
+                    name={props.ratings > number ? 'ios-star' : 'ios-star-outline'}
+                    type="ionicons"
+                    size={15}
+                    color={colors.primary}
+                />
+            ))}
         </View>
     );
 }

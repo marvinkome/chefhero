@@ -19,8 +19,8 @@ function Restaurant(props) {
             </View>
 
             <View style={style.restaurantDetailContainer}>
-                <Text style={style.restaurantName}>Restaurant Name</Text>
-                <Ratings />
+                <Text style={style.restaurantName}>{props.data.name}</Text>
+                <Ratings ratings={props.data.averageRatings} />
                 <Text style={style.restaurantPrice}>
                     N500 - N1500{' '}
                     <Text type="small" style={style.perPlate}>
