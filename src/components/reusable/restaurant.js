@@ -4,10 +4,10 @@ import { withNavigation } from 'react-navigation';
 import { Text, Ratings } from 'src/components';
 import { colors, screenConfig } from 'src/config';
 
-function Restaurant(props) {
+function _Restaurant({ navigation, data }) {
     return (
         <TouchableOpacity
-            onPress={() => props.navigation.navigate(screenConfig.main.restaurants)}
+            onPress={() => navigation.navigate(screenConfig.main.restaurants)}
             style={style.restaurantContainer}
         >
             <View style={style.restaurantImageContainer}>
@@ -19,10 +19,10 @@ function Restaurant(props) {
             </View>
 
             <View style={style.restaurantDetailContainer}>
-                <Text style={style.restaurantName}>{props.data.name}</Text>
-                <Ratings ratings={props.data.averageRatings} />
+                <Text style={style.restaurantName}>{data.name}</Text>
+                <Ratings ratings={data.averageRatings} />
                 <Text style={style.restaurantPrice}>
-                    N500 - N1500{' '}
+                    ₦{data.priceRange.min} - ₦{data.priceRange.max}{' '}
                     <Text type="small" style={style.perPlate}>
                         Per Plate
                     </Text>
@@ -78,4 +78,4 @@ const style = StyleSheet.create({
     }
 });
 
-export default withNavigation(Restaurant);
+export const Restaurant = withNavigation(_Restaurant);

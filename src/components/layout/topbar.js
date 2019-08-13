@@ -15,7 +15,7 @@ export const __Header = withNavigation((props) => {
             )}
 
             {/* title */}
-            <Text type="h3" style={style.title}>
+            <Text numberOfLines={1} type="h3" style={style.title}>
                 {props.title}
             </Text>
 

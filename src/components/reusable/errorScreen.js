@@ -22,6 +22,9 @@ const style = StyleSheet.create({
         height: Dimensions.get('screen').height * 0.5
     },
     errorText: {
-        color: colors.primary
+        color: colors.primary,
+        textAlign: 'center',
+        paddingHorizontal: 20,
+        paddingVertical: 15
     }
 });

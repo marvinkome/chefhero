@@ -1,47 +1,38 @@
-import React from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
-import { useQuery } from '@apollo/react-hooks';
+import React, { useState } from 'react';
+import { StyleSheet, ScrollView } from 'react-native';
 
 import { Container, Text } from 'src/components';
 import { MainHeader } from 'src/components/layout';
-import { Loading, ErrorScreen } from 'src/components/reusable';
-import { colors } from 'src/config';
 
-import Search from './search';
-import Restaurant from './restaurant';
+import SearchForm from './components/searchForm';
+import HomeView from './views/homePage';
+import SearchView from './views/search';
 
-import { HomePageQuery } from './gql';
+// custom functionalities
+function useHomeSearch() {
+    const [searchText, updateSearchText] = useState('');
+    const [isSearching, updateIsSearching] = useState(false);
 
-function renderFavouriteRestaurants(data) {
-    return (
-        <View style={style.sectionContainer}>
-            <Text type="h4" style={style.sectionTitle}>
-                Your Favourite Restaurant
-            </Text>
+    const onSubmitSearch = () => {
+        updateIsSearching(true);
+    };
 
-            {data.map((item) => (
-                <Restaurant key={item.id} data={item} />
-            ))}
-        </View>
-    );
-}
+    const onStopSearch = () => {
+        updateIsSearching(false);
+        updateSearchText('');
+    };
 
-function renderRecommendedRestaurants(data) {
-    return (
-        <View style={style.sectionContainer}>
-            <Text type="h4" style={style.sectionTitle}>
-                Recommended Restaurant
-            </Text>
-
-            {data.map((item) => (
-                <Restaurant key={item} data={item} />
-            ))}
-        </View>
-    );
+    return {
+        searchText,
+        isSearching,
+        updateSearchText,
+        onSubmitSearch,
+        onStopSearch
+    };
 }
 
 export default function Home() {
-    const { loading, error, data } = useQuery(HomePageQuery);
+    const searchData = useHomeSearch();
 
     return (
         <Container>
@@ -49,17 +40,18 @@ export default function Home() {
 
             <ScrollView contentContainerStyle={style.container}>
                 {/* search */}
-                <Search />
+                <SearchForm
+                    value={searchData.searchText}
+                    onChange={(text) => searchData.updateSearchText(text)}
+                    onSubmit={searchData.onSubmitSearch}
+                    isSearching={searchData.isSearching}
+                    stopSearching={searchData.onStopSearch}
+                />
 
-                {loading && <Loading />}
-
-                {error && <ErrorScreen error="Error fetching data" />}
-
-                {!loading && !error && (
-                    <React.Fragment>
-                        {renderFavouriteRestaurants(data.favouriteRestaurants)}
-                        {renderRecommendedRestaurants(data.recommendedRestaurants)}
-                    </React.Fragment>
+                {!searchData.isSearching ? (
+                    <HomeView />
+                ) : (
+                    <SearchView searchText={searchData.searchText} />
                 )}
             </ScrollView>
         </Container>
@@ -71,12 +63,5 @@ const style = StyleSheet.create({
         paddingVertical: 18,
         paddingHorizontal: 15,
         marginBottom: 40
-    },
-    sectionContainer: {
-        marginVertical: 20
-    },
-    sectionTitle: {
-        color: colors.primary,
-        fontWeight: '600'
     }
 });
