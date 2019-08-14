@@ -36,7 +36,7 @@ const HomeNavigation = createStackNavigator(
     },
     {
         headerMode: 'none',
-        initialRouteName: screenConfig.main.home
+        initialRouteName: screenConfig.main.restaurants
     }
 );
 

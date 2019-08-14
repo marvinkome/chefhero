@@ -1,67 +1,52 @@
-import React from 'react';
-import { ImageBackground, StyleSheet, View, ScrollView } from 'react-native';
-import { Container, Text, Icon, Ratings } from 'src/components';
+import React, { useState } from 'react';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { Container, Text, Tabs, TabItem } from 'src/components';
 import { ImageHeader } from 'src/components/layout';
 import { Dish } from 'src/components/reusable';
 import { colors } from 'src/config';
 
-export default class Restaurants extends React.Component {
-    renderRestaurantCard() {
-        return (
-            <View style={style.outerRestaurantCard}>
-                <View style={style.restaurantCard}>
-                    <View style={style.restaurantDetail}>
-                        <Text style={style.restaurantName} type="h3">
-                            Restaurant Name
-                        </Text>
-                        <Ratings />
-                    </View>
+import RestuarantCard from './components/restaurantCard';
 
-                    <View style={style.fav}>
-                        <Icon
-                            name="ios-heart-empty"
-                            type="ionicons"
-                            size={30}
-                            color={colors.primary}
-                        />
-                    </View>
+export default function Restaurants() {
+    return (
+        <Container>
+            <ScrollView>
+                <ImageHeader image={require('src/assets/images/restaurant.jpg')} />
+
+                <RestuarantCard />
+
+                <View style={style.menuContainer}>
+                    <Text style={style.menuTitle} type="h4">
+                        This Week's Menu
+                    </Text>
+
+                    <Tabs initialTab="monday">
+                        <TabItem id="monday" title="Monday">
+                            <Dish />
+                        </TabItem>
+                        <TabItem id="tuesday" title="Tuesday">
+                            <Dish />
+                        </TabItem>
+                        <TabItem id="wednesday" title="Wednesday">
+                            <Dish />
+                        </TabItem>
+                        <TabItem id="thursday" title="Thursday">
+                            <Dish />
+                        </TabItem>
+                        <TabItem id="friday" title="Friday">
+                            <Dish />
+                        </TabItem>
+                        <TabItem id="saturday" title="Saturday">
+                            <Dish />
+                        </TabItem>
+                        <TabItem id="sunday" title="Sunday">
+                            <Dish />
+                        </TabItem>
+                    </Tabs>
                 </View>
-            </View>
-        );
-    }
-
-    render() {
-        return (
-            <Container>
-                <ScrollView>
-                    <ImageHeader image={require('src/assets/images/restaurant.jpg')} />
-
-                    {this.renderRestaurantCard()}
-
-                    <View style={style.menuContainer}>
-                        <Text style={style.menuTitle} type="h4">
-                            This Week's Menu
-                        </Text>
-
-                        <ScrollView horizontal contentContainerStyle={style.daysContainer}>
-                            <Text style={[style.day, style.activeDay]}>Monday</Text>
-                            <Text style={style.day}>Tueday</Text>
-                            <Text style={style.day}>Wednesday</Text>
-                            <Text style={style.day}>Thursday</Text>
-                            <Text style={style.day}>Friday</Text>
-                            <Text style={style.day}>Saturday</Text>
-                            <Text style={style.day}>Sunday</Text>
-                        </ScrollView>
-
-                        <Dish />
-                        <Dish />
-                        <Dish />
-                        <Dish />
-                    </View>
-                </ScrollView>
-            </Container>
-        );
-    }
+            </ScrollView>
+        </Container>
+    );
 }
 
 const style = StyleSheet.create({
