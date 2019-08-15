@@ -1,49 +1,88 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import { groupBy } from 'lodash';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Container, Text, Tabs, TabItem } from 'src/components';
 import { ImageHeader } from 'src/components/layout';
-import { Dish } from 'src/components/reusable';
+import { Dish, Loading, ErrorScreen } from 'src/components/reusable';
+
 import { colors } from 'src/config';
+import { RestaurantQuery } from './gql';
 
 import RestuarantCard from './components/restaurantCard';
 
-export default function Restaurants() {
+function renderBody(data) {
+    const { activeMenu, ...resData } = data.restaurant;
+    const meals = groupBy(activeMenu.foods, 'day');
+
+    return (
+        <React.Fragment>
+            <RestuarantCard restaurantData={resData} />
+
+            <View style={style.menuContainer}>
+                <Text style={style.menuTitle} type="h4">
+                    This Week's Menu
+                </Text>
+
+                <Tabs initialTab="monday">
+                    <TabItem id="monday" title="Monday">
+                        {meals.monday.map((meal) => (
+                            <Dish meal={meal} key={meal.id} />
+                        ))}
+                    </TabItem>
+                    <TabItem id="tuesday" title="Tuesday">
+                        {meals.tuesday.map((meal) => (
+                            <Dish meal={meal} key={meal.id} />
+                        ))}
+                    </TabItem>
+                    <TabItem id="wednesday" title="Wednesday">
+                        {meals.wednesday.map((meal) => (
+                            <Dish meal={meal} key={meal.id} />
+                        ))}
+                    </TabItem>
+                    <TabItem id="thursday" title="Thursday">
+                        {meals.thursday.map((meal) => (
+                            <Dish meal={meal} key={meal.id} />
+                        ))}
+                    </TabItem>
+                    <TabItem id="friday" title="Friday">
+                        {meals.friday.map((meal) => (
+                            <Dish meal={meal} key={meal.id} />
+                        ))}
+                    </TabItem>
+                    <TabItem id="saturday" title="Saturday">
+                        {meals.saturday.map((meal) => (
+                            <Dish meal={meal} key={meal.id} />
+                        ))}
+                    </TabItem>
+                    <TabItem id="sunday" title="Sunday">
+                        {meals.friday.map((meal) => (
+                            <Dish meal={meal} key={meal.id} />
+                        ))}
+                    </TabItem>
+                </Tabs>
+            </View>
+        </React.Fragment>
+    );
+}
+
+export default function Restaurants(props) {
+    const id = props.navigation.getParam('id', '5d29a6f0d539da4395b2c1f8');
+    const { loading, error, data } = useQuery(RestaurantQuery, {
+        variables: { id }
+    });
+
     return (
         <Container>
             <ScrollView>
                 <ImageHeader image={require('src/assets/images/restaurant.jpg')} />
 
-                <RestuarantCard />
+                {loading && <Loading />}
+                {error && (
+                    <ErrorScreen error="Couldn't find restaurant. Please go back to home page" />
+                )}
 
-                <View style={style.menuContainer}>
-                    <Text style={style.menuTitle} type="h4">
-                        This Week's Menu
-                    </Text>
-
-                    <Tabs initialTab="monday">
-                        <TabItem id="monday" title="Monday">
-                            <Dish />
-                        </TabItem>
-                        <TabItem id="tuesday" title="Tuesday">
-                            <Dish />
-                        </TabItem>
-                        <TabItem id="wednesday" title="Wednesday">
-                            <Dish />
-                        </TabItem>
-                        <TabItem id="thursday" title="Thursday">
-                            <Dish />
-                        </TabItem>
-                        <TabItem id="friday" title="Friday">
-                            <Dish />
-                        </TabItem>
-                        <TabItem id="saturday" title="Saturday">
-                            <Dish />
-                        </TabItem>
-                        <TabItem id="sunday" title="Sunday">
-                            <Dish />
-                        </TabItem>
-                    </Tabs>
-                </View>
+                {!loading && !error && renderBody(data)}
             </ScrollView>
         </Container>
     );

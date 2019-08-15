@@ -3,7 +3,17 @@ import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Text } from 'src/components';
 import { colors } from 'src/config';
 
-export function Dish() {
+let dmeal = {
+    id: 'lolo',
+    day: 'monday',
+    name: 'Dish name',
+    price: 700
+};
+export function Dish({ meal }) {
+    if (!meal) {
+        meal = dmeal;
+    }
+
     return (
         <View style={style.dishContainer}>
             <View style={style.dishImageContainer}>
@@ -15,15 +25,17 @@ export function Dish() {
             </View>
 
             <View style={style.dishDetailContainer}>
-                <Text style={style.dishName}>Dish Name</Text>
-                <Text style={style.dishPrice}>N500</Text>
+                <Text numberOfLines={1} style={style.dishName}>
+                    {meal.name}
+                </Text>
+                <Text style={style.dishPrice}>₦{meal.price}</Text>
             </View>
 
             <View style={style.dishAction}>
-                {/* <TouchableOpacity style={style.addButton}>
+                <TouchableOpacity style={style.addButton}>
                     <Text style={style.addButtonText}>ADD</Text>
-                </TouchableOpacity> */}
-                <View style={style.counterBg}>
+                </TouchableOpacity>
+                {/* <View style={style.counterBg}>
                     <TouchableOpacity style={style.reduce}>
                         <Text style={style.counterActionText}>-</Text>
                     </TouchableOpacity>
@@ -35,7 +47,7 @@ export function Dish() {
                     <TouchableOpacity style={style.increase}>
                         <Text style={style.counterActionText}>+</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
             </View>
         </View>
     );
@@ -73,7 +85,8 @@ const style = StyleSheet.create({
         justifyContent: 'center'
     },
     dishName: {
-        color: colors.black
+        color: colors.black,
+        paddingRight: 5
     },
     dishRatings: {
         flexDirection: 'row',

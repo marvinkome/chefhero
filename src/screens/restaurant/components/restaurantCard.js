@@ -3,19 +3,24 @@ import { View, StyleSheet } from 'react-native';
 import { Ratings, Text, Icon } from 'src/components';
 import { colors } from 'src/config';
 
-export default function RestaurantCard() {
+export default function RestaurantCard({ restaurantData }) {
     return (
         <View style={style.outerRestaurantCard}>
             <View style={style.restaurantCard}>
                 <View style={style.restaurantDetail}>
                     <Text style={style.restaurantName} type="h3">
-                        Restaurant Name
+                        {restaurantData.name}
                     </Text>
-                    <Ratings />
+                    <Ratings ratings={restaurantData.averageRatings} />
                 </View>
 
                 <View style={style.fav}>
-                    <Icon name="ios-heart-empty" type="ionicons" size={30} color={colors.primary} />
+                    <Icon
+                        name={restaurantData.isFavourite ? 'ios-heart' : 'ios-heart-empty'}
+                        type="ionicons"
+                        size={30}
+                        color={colors.primary}
+                    />
                 </View>
             </View>
         </View>
