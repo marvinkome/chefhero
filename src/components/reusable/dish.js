@@ -9,6 +9,7 @@ let dmeal = {
     name: 'Dish name',
     price: 700
 };
+
 export function Dish({ meal }) {
     if (!meal) {
         meal = dmeal;
@@ -32,22 +33,25 @@ export function Dish({ meal }) {
             </View>
 
             <View style={style.dishAction}>
-                <TouchableOpacity style={style.addButton}>
-                    <Text style={style.addButtonText}>ADD</Text>
-                </TouchableOpacity>
-                {/* <View style={style.counterBg}>
-                    <TouchableOpacity style={style.reduce}>
-                        <Text style={style.counterActionText}>-</Text>
-                    </TouchableOpacity>
+                {meal.inCart ? (
+                    <View style={style.counterBg}>
+                        <TouchableOpacity style={style.reduce}>
+                            <Text style={style.counterActionText}>-</Text>
+                        </TouchableOpacity>
 
-                    <View style={style.quantity}>
-                        <Text>1</Text>
+                        <View style={style.quantity}>
+                            <Text>1</Text>
+                        </View>
+
+                        <TouchableOpacity style={style.increase}>
+                            <Text style={style.counterActionText}>+</Text>
+                        </TouchableOpacity>
                     </View>
-
-                    <TouchableOpacity style={style.increase}>
-                        <Text style={style.counterActionText}>+</Text>
+                ) : (
+                    <TouchableOpacity style={style.addButton}>
+                        <Text style={style.addButtonText}>ADD</Text>
                     </TouchableOpacity>
-                </View> */}
+                )}
             </View>
         </View>
     );

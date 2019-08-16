@@ -14,6 +14,7 @@ export const RestaurantQuery = gql`
                     day
                     name
                     price
+                    inCart
                 }
             }
         }
