@@ -1,62 +1,27 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { Container, Text } from 'src/components';
+import { useQuery } from '@apollo/react-hooks';
+
+import { StyleSheet } from 'react-native';
+import { Container } from 'src/components';
 import { StackHeader } from 'src/components/layout';
-import { Dish } from 'src/components/reusable';
+import { Loading, ErrorScreen } from 'src/components/reusable';
 import { colors } from 'src/config';
 
-export default class Cart extends React.Component {
-    render() {
-        return (
-            <Container>
-                <StackHeader title="Cart" noCart />
-                <ScrollView contentContainerStyle={style.container}>
-                    <View style={style.dayOrder}>
-                        <Text type="h3" style={style.dayTitle}>
-                            Monday
-                        </Text>
+import { CartQuery } from './gql';
+import MainView from './components/main';
 
-                        <View style={style.restaurantContainer}>
-                            <Text style={style.restaurantName}>Restarant Name</Text>
+export default function Cart() {
+    const { loading, error, data } = useQuery(CartQuery);
+    return (
+        <Container>
+            <StackHeader title="Cart" noCart />
 
-                            <Dish />
-                            <Dish />
-                        </View>
+            {loading && <Loading />}
+            {error && <ErrorScreen error="Can't get your cart data. Please try again" />}
 
-                        <View style={style.restaurantContainer}>
-                            <Text style={style.restaurantName}>Restarant Name</Text>
-
-                            <Dish />
-                        </View>
-                    </View>
-
-                    <View style={style.dayOrder}>
-                        <Text type="h3" style={style.dayTitle}>
-                            Tuesday
-                        </Text>
-
-                        <View style={style.restaurantContainer}>
-                            <Text style={style.restaurantName}>Restarant Name</Text>
-
-                            <Dish />
-                            <Dish />
-                        </View>
-
-                        <View style={style.restaurantContainer}>
-                            <Text style={style.restaurantName}>Restarant Name</Text>
-
-                            <Dish />
-                        </View>
-                    </View>
-                </ScrollView>
-
-                <TouchableOpacity style={style.payment}>
-                    <Text style={style.paymentText}>Make Order</Text>
-                    <Text style={style.paymentPrice}>N6000</Text>
-                </TouchableOpacity>
-            </Container>
-        );
-    }
+            {!loading && !error && <MainView data={data} />}
+        </Container>
+    );
 }
 
 const style = StyleSheet.create({
@@ -73,7 +38,7 @@ const style = StyleSheet.create({
     },
 
     restaurantContainer: {
-        paddingVertical: 10
+        paddingVertical: 5
     },
     restaurantName: {
         fontWeight: '500'

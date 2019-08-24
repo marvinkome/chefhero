@@ -1,15 +1,13 @@
 import { gql } from 'apollo-boost';
 
-export const RestaurantQuery = gql`
-    query Restaurant($id: ID!) {
-        restaurant(id: $id) {
+export const CartQuery = gql`
+    query CartQuery {
+        cart {
             id
-            name
-            averageRatings
-            isFavourite
-            activeMenu {
+            totalAmount
+            items {
                 id
-                foods {
+                food {
                     id
                     day
                     name

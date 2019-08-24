@@ -13,7 +13,9 @@ import RestuarantCard from './components/restaurantCard';
 
 function renderBody(data) {
     const { activeMenu, ...resData } = data.restaurant;
-    const meals = groupBy(activeMenu.foods, 'day');
+    const hasActiveMeals = !!activeMenu;
+
+    const meals = hasActiveMeals ? groupBy(activeMenu.foods, 'day') : {};
 
     return (
         <React.Fragment>
@@ -24,43 +26,47 @@ function renderBody(data) {
                     This Week's Menu
                 </Text>
 
-                <Tabs initialTab="monday">
-                    <TabItem id="monday" title="Monday">
-                        {meals.monday.map((meal) => (
-                            <Dish meal={meal} key={meal.id} />
-                        ))}
-                    </TabItem>
-                    <TabItem id="tuesday" title="Tuesday">
-                        {meals.tuesday.map((meal) => (
-                            <Dish meal={meal} key={meal.id} />
-                        ))}
-                    </TabItem>
-                    <TabItem id="wednesday" title="Wednesday">
-                        {meals.wednesday.map((meal) => (
-                            <Dish meal={meal} key={meal.id} />
-                        ))}
-                    </TabItem>
-                    <TabItem id="thursday" title="Thursday">
-                        {meals.thursday.map((meal) => (
-                            <Dish meal={meal} key={meal.id} />
-                        ))}
-                    </TabItem>
-                    <TabItem id="friday" title="Friday">
-                        {meals.friday.map((meal) => (
-                            <Dish meal={meal} key={meal.id} />
-                        ))}
-                    </TabItem>
-                    <TabItem id="saturday" title="Saturday">
-                        {meals.saturday.map((meal) => (
-                            <Dish meal={meal} key={meal.id} />
-                        ))}
-                    </TabItem>
-                    <TabItem id="sunday" title="Sunday">
-                        {meals.friday.map((meal) => (
-                            <Dish meal={meal} key={meal.id} />
-                        ))}
-                    </TabItem>
-                </Tabs>
+                {hasActiveMeals ? (
+                    <Tabs initialTab="monday">
+                        <TabItem id="monday" title="Monday">
+                            {meals.monday.map((meal) => (
+                                <Dish meal={meal} key={meal.id} />
+                            ))}
+                        </TabItem>
+                        <TabItem id="tuesday" title="Tuesday">
+                            {meals.tuesday.map((meal) => (
+                                <Dish meal={meal} key={meal.id} />
+                            ))}
+                        </TabItem>
+                        <TabItem id="wednesday" title="Wednesday">
+                            {meals.wednesday.map((meal) => (
+                                <Dish meal={meal} key={meal.id} />
+                            ))}
+                        </TabItem>
+                        <TabItem id="thursday" title="Thursday">
+                            {meals.thursday.map((meal) => (
+                                <Dish meal={meal} key={meal.id} />
+                            ))}
+                        </TabItem>
+                        <TabItem id="friday" title="Friday">
+                            {meals.friday.map((meal) => (
+                                <Dish meal={meal} key={meal.id} />
+                            ))}
+                        </TabItem>
+                        <TabItem id="saturday" title="Saturday">
+                            {meals.saturday.map((meal) => (
+                                <Dish meal={meal} key={meal.id} />
+                            ))}
+                        </TabItem>
+                        <TabItem id="sunday" title="Sunday">
+                            {meals.friday.map((meal) => (
+                                <Dish meal={meal} key={meal.id} />
+                            ))}
+                        </TabItem>
+                    </Tabs>
+                ) : (
+                    <ErrorScreen error="No meals for this week" />
+                )}
             </View>
         </React.Fragment>
     );

@@ -7,7 +7,11 @@ import { colors, screenConfig } from 'src/config';
 function Restaurant({ navigation, data }) {
     return (
         <TouchableOpacity
-            onPress={() => navigation.navigate(screenConfig.main.restaurants)}
+            onPress={() =>
+                navigation.navigate(screenConfig.main.restaurants, {
+                    id: data.id
+                })
+            }
             style={style.restaurantContainer}
         >
             <View style={style.restaurantImageContainer}>

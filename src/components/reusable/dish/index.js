@@ -1,19 +1,33 @@
 import React from 'react';
+import { useMutation } from '@apollo/react-hooks';
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Text } from 'src/components';
 import { colors } from 'src/config';
+import { IncreaseItemMutation, DecreaseItemMutation, AddItemMutation } from './gql';
+import { RestaurantQuery } from 'src/screens/restaurant/gql';
 
-let dmeal = {
-    id: 'lolo',
-    day: 'monday',
-    name: 'Dish name',
-    price: 700
-};
+function useActions(meal) {
+    const [increaseDish] = useMutation(IncreaseItemMutation);
+    const [decreaseDish] = useMutation(DecreaseItemMutation);
+    const [addToCart] = useMutation(AddItemMutation);
+
+    return {
+        increaseDish: () => increaseDish({ variables: { cartItemId: meal.cartItemId } }),
+        decreaseDish: () =>
+            decreaseDish({
+                variables: { cartItemId: meal.cartItemId },
+                ...(meal.quantityInCart <= 1 && {
+                    refetchQueries: () => [
+                        { query: RestaurantQuery, variables: { id: meal.restaurantId } }
+                    ]
+                })
+            }),
+        addToCart: () => addToCart({ variables: { foodId: meal.id } })
+    };
+}
 
 export function Dish({ meal }) {
-    if (!meal) {
-        meal = dmeal;
-    }
+    const { increaseDish, decreaseDish, addToCart } = useActions(meal);
 
     return (
         <View style={style.dishContainer}>
@@ -35,20 +49,20 @@ export function Dish({ meal }) {
             <View style={style.dishAction}>
                 {meal.inCart ? (
                     <View style={style.counterBg}>
-                        <TouchableOpacity style={style.reduce}>
+                        <TouchableOpacity onPress={decreaseDish} style={style.reduce}>
                             <Text style={style.counterActionText}>-</Text>
                         </TouchableOpacity>
 
                         <View style={style.quantity}>
-                            <Text>1</Text>
+                            <Text>{meal.quantityInCart}</Text>
                         </View>
 
-                        <TouchableOpacity style={style.increase}>
+                        <TouchableOpacity onPress={increaseDish} style={style.increase}>
                             <Text style={style.counterActionText}>+</Text>
                         </TouchableOpacity>
                     </View>
                 ) : (
-                    <TouchableOpacity style={style.addButton}>
+                    <TouchableOpacity onPress={addToCart} style={style.addButton}>
                         <Text style={style.addButtonText}>ADD</Text>
                     </TouchableOpacity>
                 )}
